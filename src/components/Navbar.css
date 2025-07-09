@@ -1,0 +1,138 @@
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #1c1c1c;
+  color: #fff;
+}
+
+/* Navbar Container */
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, #2c3e50, #4ca1af); /* Dark gradient */
+  color: white;
+  padding: 14px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Brand Logo */
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+  color: #fdd835;
+  letter-spacing: 1px;
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  padding: 8px 16px;
+  color: #ffffff;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: background 0.3s ease, color 0.3s ease;
+  position: relative;
+}
+
+.nav-links a:hover {
+  color: #fdd835;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background-color: #fdd835;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Mobile Menu Button */
+.menu-btn {
+  display: none;
+  font-size: 24px;
+  color: #fdd835;
+  cursor: pointer;
+}
+
+/* Sidebar for Mobile */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 240px;
+  height: 100vh;
+  background: rgba(44, 62, 80, 0.95); /* Dark translucent */
+  backdrop-filter: blur(12px);
+  box-shadow: -10px 0 20px rgba(0, 0, 0, 0.6);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1100;
+}
+
+.sidebar a {
+  margin: 16px 0;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 6px;
+  transition: color 0.3s;
+}
+
+.sidebar a:hover {
+  color: #fdd835;
+}
+
+.close-btn {
+  align-self: flex-end;
+  font-size: 22px;
+  color: #fdd835;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+.menu-btn{
+  align-self: flex-end;
+  font-size: 22px;
+  color: #fdd835;
+  cursor: pointer;
+  margin-bottom: 20px;
+
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+}

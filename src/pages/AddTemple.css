@@ -1,0 +1,53 @@
+.add-temple-container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.add-temple-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.temple-form label {
+  display: block;
+  margin: 12px 0 5px;
+  font-weight: 600;
+  color: #444;
+}
+
+.temple-form input[type="text"],
+.temple-form input[type="file"],
+.temple-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  resize: vertical;
+}
+
+.temple-form textarea {
+  min-height: 120px;
+}
+
+.temple-form button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.temple-form button:hover {
+  background-color: #303f9f;
+}
