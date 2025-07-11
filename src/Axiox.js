@@ -1,5 +1,5 @@
 import axios from 'axios'
 const Axios=axios.create({
-    baseURL:"http://localhost:8080/"
+    baseURL:"https://temple-backend-1-vl4u.onrender.com"
 })
 export default Axios
