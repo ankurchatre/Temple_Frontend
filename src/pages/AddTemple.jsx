@@ -6,31 +6,27 @@ function AddTemple() {
   const [authorized, setAuthorized] = useState(false);
   const [checkedPassword, setCheckedPassword] = useState(false);
 
+  // 🔐 Password check logic
   useEffect(() => {
-    const runAuth = () => {
-      alert("🚫 This section is only for admin.\nPlease enter the admin password to continue.");
+    alert("🚫 This section is only for admin.\nPlease enter the admin password to continue.");
 
-      const correctPassword = "Ankur@1234";
-      const userInput = window.prompt("🔐 Enter admin password:");
+    const correctPassword = "Ankur@1234";
+    const userInput = window.prompt("🔐 Enter admin password:");
 
-      if (userInput === correctPassword) {
-        setAuthorized(true);
-      } else {
-        alert("❌ Incorrect password.\nRedirecting to homepage...");
-        window.location.href = "/";
-      }
+    if (userInput === correctPassword) {
+      setAuthorized(true);
+    }
 
-      setCheckedPassword(true); // ✅ Always set this after prompt
-    };
-
-    runAuth();
+    setCheckedPassword(true); // ✅ Always update this after prompt
   }, []);
 
-  // ⏳ Wait until password is entered
-  if (!checkedPassword) return null;
-
-  // 🔒 If unauthorized, show nothing (redirect already triggered)
-  if (!authorized) return null;
+  // 🔁 Redirect if not authorized after check
+  useEffect(() => {
+    if (checkedPassword && !authorized) {
+      alert("❌ Incorrect password. Redirecting to homepage...");
+      window.location.href = "/";
+    }
+  }, [checkedPassword, authorized]);
 
   // 📝 Form state
   const [formData, setFormData] = useState({
@@ -55,11 +51,9 @@ function AddTemple() {
     event.preventDefault();
 
     try {
-      // 1. Add temple info
       const response = await Axios.post("/temple", formData);
       const templeId = response.data.id;
 
-      // 2. Upload image
       if (imageFile) {
         const imgFormData = new FormData();
         imgFormData.append("image", imageFile);
@@ -71,7 +65,7 @@ function AddTemple() {
         alert("✅ Temple data and image uploaded successfully!");
       }
 
-      // 3. Reset form
+      // Reset form
       setFormData({
         name: "",
         city: "",
@@ -84,6 +78,9 @@ function AddTemple() {
       alert("❌ Error adding temple or uploading image");
     }
   };
+
+  // ⏳ Wait until password is checked
+  if (!checkedPassword || !authorized) return null;
 
   return (
     <div className="add-temple-container">
