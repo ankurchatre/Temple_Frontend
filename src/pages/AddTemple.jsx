@@ -3,20 +3,27 @@ import Axios from "../Axiox";
 import "./AddTemple.css";
 
 function AddTemple() {
-   const [authorized, setAuthorized] = useState(false);
+  const [authorized, setAuthorized] = useState(false);
+  const [checkedPassword, setCheckedPassword] = useState(false);
 
   useEffect(() => {
-    const correctPassword = "admin123"; // 🔐 Your secret password
-    const userInput = window.prompt("Enter admin password to access this page:");
+    // Show a short message before password
+    alert("🚫 This section is only for admin.\nPlease enter the admin password to continue.");
+
+    const correctPassword = "Ankur@1234";
+    const userInput = window.prompt("🔐 Enter admin password:");
     if (userInput === correctPassword) {
       setAuthorized(true);
     } else {
-      alert("Incorrect password. Redirecting to homepage.");
-      window.location.href = "/"; // 🔁 Redirect to home or temples page
+      alert("❌ Incorrect password.\nRedirecting to homepage...");
+      window.location.href = "/";
     }
+
+    setCheckedPassword(true);
   }, []);
 
-  if (!authorized) return null; // Don't render anything until authorized
+  if (!checkedPassword) return null;
+  if (!authorized) return null;
 
   const [formData, setFormData] = useState({
     name: "",
