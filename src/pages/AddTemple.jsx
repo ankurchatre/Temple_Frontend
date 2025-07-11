@@ -3,6 +3,21 @@ import Axios from "../Axiox";
 import "./AddTemple.css";
 
 function AddTemple() {
+   const [authorized, setAuthorized] = useState(false);
+
+  useEffect(() => {
+    const correctPassword = "admin123"; // 🔐 Your secret password
+    const userInput = window.prompt("Enter admin password to access this page:");
+    if (userInput === correctPassword) {
+      setAuthorized(true);
+    } else {
+      alert("Incorrect password. Redirecting to homepage.");
+      window.location.href = "/"; // 🔁 Redirect to home or temples page
+    }
+  }, []);
+
+  if (!authorized) return null; // Don't render anything until authorized
+
   const [formData, setFormData] = useState({
     name: "",
     city: "",
