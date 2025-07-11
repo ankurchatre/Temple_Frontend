@@ -7,25 +7,32 @@ function AddTemple() {
   const [checkedPassword, setCheckedPassword] = useState(false);
 
   useEffect(() => {
-    // Admin warning message
-    alert("🚫 This section is only for admin.\nPlease enter the admin password to continue.");
+    const runAuth = () => {
+      alert("🚫 This section is only for admin.\nPlease enter the admin password to continue.");
 
-    const correctPassword = "Ankur@1234";
-    const userInput = window.prompt("🔐 Enter admin password:");
+      const correctPassword = "Ankur@1234";
+      const userInput = window.prompt("🔐 Enter admin password:");
 
-    if (userInput === correctPassword) {
-      setAuthorized(true);
-      setCheckedPassword(true);
-    } else {
-      alert("❌ Incorrect password.\nRedirecting to homepage...");
-      window.location.href = "/";
-      return; // stop further execution
-    }
+      if (userInput === correctPassword) {
+        setAuthorized(true);
+      } else {
+        alert("❌ Incorrect password.\nRedirecting to homepage...");
+        window.location.href = "/";
+      }
+
+      setCheckedPassword(true); // ✅ Always set this after prompt
+    };
+
+    runAuth();
   }, []);
 
-  // Show nothing until password is verified
-  if (!checkedPassword || !authorized) return null;
+  // ⏳ Wait until password is entered
+  if (!checkedPassword) return null;
 
+  // 🔒 If unauthorized, show nothing (redirect already triggered)
+  if (!authorized) return null;
+
+  // 📝 Form state
   const [formData, setFormData] = useState({
     name: "",
     city: "",
@@ -80,7 +87,7 @@ function AddTemple() {
 
   return (
     <div className="add-temple-container">
-      <h2>Add Temple</h2>
+      <h2>➕ Add Temple (Admin Panel)</h2>
       <form onSubmit={handleSubmit} className="temple-form">
         <label>नाम (Temple Name):</label>
         <input type="text" name="name" value={formData.name} onChange={handleChange} required />
