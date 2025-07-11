@@ -7,23 +7,24 @@ function AddTemple() {
   const [checkedPassword, setCheckedPassword] = useState(false);
 
   useEffect(() => {
-    // Show a short message before password
+    // Admin warning message
     alert("🚫 This section is only for admin.\nPlease enter the admin password to continue.");
 
     const correctPassword = "Ankur@1234";
     const userInput = window.prompt("🔐 Enter admin password:");
+
     if (userInput === correctPassword) {
       setAuthorized(true);
+      setCheckedPassword(true);
     } else {
       alert("❌ Incorrect password.\nRedirecting to homepage...");
       window.location.href = "/";
+      return; // stop further execution
     }
-
-    setCheckedPassword(true);
   }, []);
 
-  if (!checkedPassword) return null;
-  if (!authorized) return null;
+  // Show nothing until password is verified
+  if (!checkedPassword || !authorized) return null;
 
   const [formData, setFormData] = useState({
     name: "",
@@ -32,7 +33,7 @@ function AddTemple() {
     description: ""
   });
 
-  const [imageFile, setImageFile] = useState(null); // actual image file
+  const [imageFile, setImageFile] = useState(null);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -40,7 +41,7 @@ function AddTemple() {
   };
 
   const handleImageChange = (event) => {
-    setImageFile(event.target.files[0]); // get the selected file
+    setImageFile(event.target.files[0]);
   };
 
   const handleSubmit = async (event) => {
@@ -60,10 +61,10 @@ function AddTemple() {
           headers: { "Content-Type": "multipart/form-data" }
         });
 
-        alert("Temple data and image uploaded successfully!");
+        alert("✅ Temple data and image uploaded successfully!");
       }
 
-      // 3. Reset
+      // 3. Reset form
       setFormData({
         name: "",
         city: "",
@@ -73,7 +74,7 @@ function AddTemple() {
       setImageFile(null);
     } catch (error) {
       console.error("Upload error:", error);
-      alert("Error adding temple or uploading image");
+      alert("❌ Error adding temple or uploading image");
     }
   };
 
